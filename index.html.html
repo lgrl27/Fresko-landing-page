@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fresko te ayuda a monitorear tus alimentos, recibir alertas y aprovecharlos a tiempo.">
+  <title>Fresko | Cuida tus alimentos, aprovecha cada día</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--green:#25a244;--green-dark:#075e3b;--green-soft:#e8f7e9;--ink:#111b21;--muted:#52636b;--line:#e7ece9;--cream:#f7faf7}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,Arial,sans-serif;color:var(--ink);line-height:1.65;background:#fff}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1120px,calc(100% - 48px));margin:auto}
+    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .nav-wrap{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:9px;color:var(--green-dark)}
+    .brand-logo{display:block;width:42px;height:40px;object-fit:contain}
+    .brand-name{font-size:1.55rem;font-weight:800;letter-spacing:-1px;color:var(--green-dark);line-height:1}
+    .footer-brand-lockup{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+    .footer-brand-lockup img{width:38px;height:36px;object-fit:contain}
+    .footer-brand-lockup span{font-size:1.35rem;font-weight:800;color:#fff;letter-spacing:-.7px}
+    
+    nav{display:flex;align-items:center;gap:clamp(10px,1.5vw,22px)}
+    nav a{font-size:clamp(.76rem,.9vw,.9rem);font-weight:600;color:#43535a;transition:color .2s}
+    nav a:hover{color:var(--green)}
+    .button{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:13px 24px;background:var(--green);color:#fff;font-weight:700;font-size:.95rem;transition:.2s;border:1px solid var(--green)}
+    .button:hover{background:#1d8c3a;transform:translateY(-1px)}
+    .button-outline{background:transparent;color:var(--green-dark);border-color:#9acda6}
+    .button-outline:hover{background:var(--green-soft);color:var(--green-dark)}
+    .download-button{cursor:default;box-shadow:none;background:#e8f7e9;border-color:#9acda6;color:#075e3b;gap:10px;padding:13px 22px}
+    .download-button svg{width:19px;height:19px;flex:0 0 19px;stroke:currentColor}
+    .download-button:hover{background:#d9f0dc;border-color:#75b985;color:#075e3b;transform:none}
+    .menu-btn{display:none;background:none;border:0;font-size:1.8rem;color:var(--green-dark);cursor:pointer}
+    .hero{background:var(--green-soft);padding:78px 0 82px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1fr 1.08fr;gap:55px;align-items:center}
+    .eyebrow{display:inline-block;color:var(--green-dark);font-weight:700;font-size:.82rem;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:15px}
+    h1{font-size:clamp(2.5rem,5vw,4.15rem);line-height:1.08;letter-spacing:-2px;color:var(--green-dark);max-width:570px}
+    .hero p{font-size:1.12rem;color:#4d6260;max-width:510px;margin:22px 0 30px}
+    .hero-actions{display:flex;gap:13px;flex-wrap:wrap}
+    .product-shot{background:#fff;padding:10px;border-radius:18px;box-shadow:0 24px 65px rgba(7,94,59,.16);transform:rotate(1deg)}
+    .product-shot img{display:block;width:100%;height:auto;border-radius:10px}
+    section{padding:82px 0}
+    .section-head{max-width:680px;margin-bottom:38px}
+    .section-label{font-size:.82rem;text-transform:uppercase;letter-spacing:1px;color:var(--green);font-weight:800}
+    h2{font-size:clamp(1.9rem,3.5vw,2.7rem);line-height:1.2;letter-spacing:-1px;color:var(--green-dark);margin:9px 0 14px}
+    .lead{font-size:1.06rem;color:var(--muted)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+    .about-copy p{color:var(--muted);margin-top:14px}
+    .about-note{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:30px}
+    .about-note strong{color:var(--green-dark)}
+    .benefits{background:#f8faf8}
+    .benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .benefit{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px}
+    .benefit-icon{width:48px;height:48px;border-radius:15px;background:var(--green-soft);display:grid;place-items:center;font-size:1.45rem;margin-bottom:17px}
+    .benefit h3{font-size:1.08rem;margin-bottom:7px;color:#172a21}
+    .benefit p{font-size:.94rem;color:var(--muted)}
+    .video-section{background:#fff}
+    .video-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:46px;align-items:center}
+    .video-copy p{color:var(--muted);margin:14px 0 18px}
+    .video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#eaf2ec;box-shadow:0 16px 42px rgba(0,0,0,.09)}
+    .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .video-source{font-size:.78rem;color:#75827d;margin-top:10px}
+    .gallery-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(230px,.8fr);gap:28px;align-items:center}
+    .gallery-desktop{padding:12px;transform:none}
+    .gallery-mobile-wrap{display:flex;justify-content:center;align-items:center;background:#f1f7f2;border:1px solid var(--line);border-radius:22px;padding:22px;min-height:100%}
+    .gallery-mobile{display:block;width:min(100%,260px);height:auto;border-radius:28px;box-shadow:0 16px 38px rgba(0,0,0,.13)}
+    .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:46px;align-items:start}
+    .contact-info{display:grid;gap:14px;margin-top:24px}
+    .contact-item{display:flex;gap:13px;align-items:flex-start;background:var(--cream);border:1px solid var(--line);border-radius:15px;padding:16px}
+    .contact-item .benefit-icon{flex:0 0 42px;width:42px;height:42px;margin:0;font-size:1.15rem}
+    .contact-item strong{display:block;color:var(--green-dark);font-size:.94rem}
+    .contact-item span{display:block;color:var(--muted);font-size:.9rem;overflow-wrap:anywhere}
+    .contact-form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 12px 32px rgba(0,0,0,.05)}
+    .contact-form label{display:block;font-weight:600;font-size:.88rem;margin:12px 0 5px}
+    .contact-form input,.contact-form textarea,.contact-form select{width:100%;padding:12px 14px;border:1px solid #dce5df;border-radius:10px;font:inherit;font-size:.92rem;background:#fbfdfb}
+    .contact-form textarea{resize:vertical;min-height:105px}
+    .contact-form .button{margin-top:16px;cursor:pointer}
+    .form-note{font-size:.78rem;color:#77847d;margin-top:12px}
+    .closing{background:var(--green-dark);color:#fff;text-align:center;padding:66px 0}
+    .closing h2{color:#fff;margin:0 auto 12px}
+    .closing p{color:#d2e8d9;margin:0 auto 24px;max-width:620px}
+    .closing .button{background:#fff;color:var(--green-dark);border-color:#fff}
+    footer{padding:28px 0;background:#06482f;color:#d9eade}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap;font-size:.88rem}
+    .footer-brand{font-weight:800;font-size:1.15rem;color:#fff}
+    .to-top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border:0;border-radius:50%;background:var(--green);color:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 5px 18px #0002;display:none}
+    .to-top.show{display:block}
+    @media(max-width:1000px){.nav-wrap{gap:12px}nav{gap:10px}nav a{font-size:.76rem}.brand-name{font-size:1.35rem}.brand-logo{width:36px;height:36px}}
+    @media(max-width:850px){.hero-grid,.about-grid,.video-grid,.contact-grid{grid-template-columns:1fr}.hero-grid{gap:36px}.product-shot{max-width:700px}.benefit-grid{grid-template-columns:1fr 1fr}.video-grid{gap:28px}.gallery-grid{grid-template-columns:1fr}.gallery-mobile-wrap{padding:24px}.gallery-mobile{width:min(100%,250px)}}
+    @media(max-width:650px){.container{width:min(100% - 34px,1120px)}.nav-wrap{height:68px}.menu-btn{display:block}nav{display:none;position:absolute;left:0;right:0;top:68px;padding:18px 24px 24px;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:15px}nav.open{display:flex}nav .button{text-align:center}.hero{padding:55px 0}.hero-grid{gap:30px}h1{letter-spacing:-1.2px}.hero p{font-size:1rem}section{padding:62px 0}.benefit-grid{grid-template-columns:1fr}.about-note{padding:23px}.footer-inner{flex-direction:column;align-items:flex-start}.footer-inner>div:last-child{text-align:left!important}.footer-inner>div:last-child>div:last-child{justify-content:flex-start!important}.contact-form{padding:21px}.gallery-mobile-wrap{padding:18px}.gallery-mobile{width:min(100%,230px)}}
+  </style>
+</head>
+<body>
+<header id="inicio">
+  <div class="container nav-wrap">
+    <a class="brand" href="#inicio" aria-label="Fresko, inicio"><img class="brand-logo" src="imagenes/logo-fresko.png" alt=""><span class="brand-name">Fresko</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <a href="#nosotros">Quiénes somos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#galeria">Galería</a>
+      <a href="#testimonios">Testimonios</a>
+      <a class="button" href="#contactanos">Contáctanos</a>
+      <button class="button download-button" type="button" aria-disabled="true">Descargar <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg></button>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero" id="fresko">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Una forma más inteligente de cuidar tus alimentos</span>
+        <h1>Cuida tus alimentos. Aprovecha cada día.</h1>
+        <p>Con Fresko puedes llevar el control de tus alimentos, conocer cuáles debes consumir primero y recibir alertas para aprovecharlos a tiempo.</p>
+        <div class="hero-actions">
+          <a class="button" href="#servicios">Descubre nuestros servicios</a>
+          <a class="button button-outline" href="#nosotros">Conoce más</a>
+        </div>
+      </div>
+      <div class="product-shot">
+        <img src="imagenes/fresko-panel.png" alt="Panel principal de Fresko con resumen de alimentos y próximos vencimientos">
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros">
+    <div class="container about-grid">
+      <div class="about-copy">
+        <span class="section-label">Quiénes somos</span>
+        <h2>Tecnología al servicio del bienestar en casa</h2>
+        <p><strong>Alimora</strong> es una startup de impacto tecnológico que impulsa soluciones para mejorar el bienestar de las personas y promover hábitos de consumo responsables.</p>
+        <p><strong>Fresko</strong> es nuestra aplicación inteligente que ayuda a monitorear la frescura de los alimentos, organizar su consumo y reducir el desperdicio en el hogar.</p>
+      </div>
+      <div class="about-note">
+        <span class="section-label">Nuestra propuesta</span>
+        <h3 style="font-size:1.35rem;margin:9px 0 10px;color:#075e3b">Más información para tomar mejores decisiones.</h3>
+        <p style="color:#52636b">Desde el registro de tus alimentos hasta las alertas y recomendaciones, Fresko reúne en un solo lugar la información que necesitas para cuidar lo que tienes en casa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits" id="servicios">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">Nuestros servicios</span>
+        <h2>Todo lo que necesitas para cuidar y organizar tus alimentos</h2>
+        <p class="lead">Mantén tu información organizada y recibe ayuda para aprovechar mejor tus alimentos.</p>
+      </div>
+      <div class="benefit-grid">
+        <article class="benefit"><div class="benefit-icon">🍅</div><h3>Control de alimentos</h3><p>Registra tus productos, cantidades, fechas y lugares de almacenamiento en un solo espacio.</p></article>
+        <article class="benefit"><div class="benefit-icon">🔔</div><h3>Alertas oportunas</h3><p>Identifica los alimentos próximos a vencer y prioriza cuáles consumir primero.</p></article>
+        <article class="benefit"><div class="benefit-icon">🛒</div><h3>Lista de compras</h3><p>Organiza los productos que necesitas y lleva un mejor seguimiento de tus compras.</p></article>
+        <article class="benefit"><div class="benefit-icon">🥗</div><h3>Preparación de comidas</h3><p>Encuentra recetas y organiza tus comidas con los alimentos disponibles.</p></article>
+        <article class="benefit"><div class="benefit-icon">📷</div><h3>Análisis inteligente</h3><p>Utiliza la cámara y la inteligencia artificial para apoyar la identificación de señales visibles en los alimentos.</p></article>
+        <article class="benefit"><div class="benefit-icon">🏡</div><h3>Una mejor rutina en casa</h3><p>Ten la información de tus alimentos a la mano y toma decisiones de consumo con mayor facilidad.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="container about-grid">
+      <div class="about-copy">
+        <span class="section-label">Proyectos</span>
+        <h2>Una propuesta pensada para el día a día</h2>
+        <p>Fresko reúne herramientas para que cada hogar pueda llevar un mejor seguimiento de sus alimentos, organizar sus compras y planificar comidas con lo que ya tiene disponible.</p>
+        <p>La propuesta integra tecnología e información práctica para fomentar decisiones de consumo más conscientes y reducir el desperdicio de alimentos.</p>
+      </div>
+      <div class="about-note">
+        <span class="section-label">Nuestro enfoque</span>
+        <h3 style="font-size:1.35rem;margin:9px 0 10px;color:#075e3b">Bienestar, organización y aprovechamiento.</h3>
+        <p style="color:#52636b">Un solo espacio para consultar tus alimentos, reconocer cuáles necesitan atención y aprovechar mejor los productos de casa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits" id="galeria">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">Galería</span>
+        <h2>Fresko, en cada detalle</h2>
+        <p class="lead">Conoce la experiencia de Fresko desde tu computadora o desde tu celular.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="product-shot gallery-desktop">
+          <img src="imagenes/fresko-panel.png" alt="Panel de Fresko en versión de escritorio con resumen de alimentos y próximos vencimientos">
+          <p style="text-align:center;color:var(--muted);font-size:.88rem;padding:10px 4px 2px">Versión de escritorio</p>
+        </div>
+        <div class="gallery-mobile-wrap">
+          <div>
+            <img class="gallery-mobile" src="imagenes/mockup-mobile.png" alt="Pantalla de inicio de Fresko en un teléfono móvil, con alimentos próximos a vencer">
+            <p style="text-align:center;color:var(--muted);font-size:.88rem;margin-top:12px">Versión móvil</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonios">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">Testimonios</span>
+        <h2>Las experiencias hacen crecer a Fresko</h2>
+        <p class="lead">Cada hogar tiene una manera distinta de organizar sus alimentos. Queremos que Fresko acompañe esas rutinas y ayude a tomar decisiones más prácticas cada día.</p>
+      </div>
+      <div class="about-note" style="max-width:760px">
+        <h3 style="font-size:1.15rem;color:#075e3b;margin-bottom:8px">Tu experiencia también cuenta</h3>
+        <p style="color:#52636b">Estamos construyendo una experiencia que responda a las necesidades reales de las personas. Próximamente compartiremos aquí las opiniones de quienes utilizan Fresko.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="video-section" id="consejos">
+    <div class="container video-grid">
+      <div class="video-copy">
+        <span class="section-label">Consejos para tu hogar</span>
+        <h2>5 consejos para reducir el desperdicio de alimentos</h2>
+        <p>Conoce recomendaciones sencillas para aprovechar mejor los alimentos que compras y evitar que terminen en la basura.</p>
+        <a class="button button-outline" href="https://www.youtube.com/watch?v=FuYE7F71qEk" target="_blank" rel="noopener">Ver video en YouTube</a>
+        <p class="video-source">Video educativo: Loughborough University.</p>
+      </div>
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/FuYE7F71qEk" title="5 consejos para reducir el desperdicio de alimentos" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="contactanos">
+    <div class="container contact-grid">
+      <div>
+        <span class="section-label">Contáctanos</span>
+        <h2>Hablemos</h2>
+        <p class="lead">¿Tienes alguna consulta o quieres conocer más sobre Fresko? Estamos aquí para ayudarte.</p>
+        <div class="contact-info">
+          <div class="contact-item"><div class="benefit-icon">👩🏻‍💼</div><div><strong>Atención al cliente</strong><span>Equipo Fresko</span></div></div>
+          <div class="contact-item"><div class="benefit-icon">✉️</div><div><strong>Correo electrónico</strong><span>contacto@fresko.com</span></div></div>
+          <div class="contact-item"><div class="benefit-icon">📞</div><div><strong>Teléfono</strong><span>+51 987 654 321</span></div></div>
+          <div class="contact-item"><div class="benefit-icon">📍</div><div><strong>Ubicación</strong><span>Lima, Perú</span></div></div>
+        </div>
+        <p class="form-note">Datos de contacto ficticios, incluidos como referencia para la presentación del proyecto.</p>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <h3 style="font-size:1.2rem;color:var(--green-dark);margin-bottom:5px">Envíanos un mensaje</h3>
+        <p style="color:var(--muted);font-size:.9rem">Completa tus datos y cuéntanos en qué podemos ayudarte.</p>
+        <label for="contactName">Nombre completo</label>
+        <input id="contactName" name="nombre" type="text" placeholder="Ej. Ana Torres" required>
+        <label for="contactEmail">Correo electrónico</label>
+        <input id="contactEmail" name="correo" type="email" placeholder="nombre@correo.com" required>
+        <label for="contactSubject">Motivo de consulta</label>
+        <select id="contactSubject" name="motivo"><option>Información sobre Fresko</option><option>Ayuda con la aplicación</option><option>Comentarios y sugerencias</option></select>
+        <label for="contactMessage">Mensaje</label>
+        <textarea id="contactMessage" name="mensaje" placeholder="Escribe tu mensaje aquí..."></textarea>
+        <button class="button" type="submit">Enviar mensaje</button>
+        <p class="form-note" id="contactFeedback">Formulario demostrativo: no envía información a un servidor.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="container">
+      <h2>Haz que cada alimento cuente.</h2>
+      <p>Con Fresko, cuidar tus alimentos y aprovecharlos a tiempo puede ser parte de tu día a día.</p>
+      <a class="button" href="#inicio">Volver al inicio</a>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="container footer-inner">
+    <div><div class="footer-brand-lockup"><img src="imagenes/logo-fresko.png" alt=""><span>Fresko</span></div><div>Una solución de Alimora</div><p style="font-size:.85rem;margin-top:10px">Correo: contacto@fresko.com</p></div>
+    <div style="text-align:right"><div style="font-weight:700;color:#fff;margin-bottom:7px">Síguenos</div><div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:flex-end"><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a></div><p style="font-size:.82rem;margin-top:15px">© 2026 Fresko. Todos los derechos reservados.</p></div>
+  </div>
+</footer>
+<button class="to-top" id="toTop" aria-label="Volver arriba">↑</button>
+<script>
+  const menuBtn=document.getElementById('menuBtn');
+  const menu=document.getElementById('menu');
+  menuBtn.addEventListener('click',()=>{const open=menu.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'×':'☰';});
+  menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{menu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰';}));
+  const contactForm=document.getElementById('contactForm');
+  contactForm.addEventListener('submit',(event)=>{event.preventDefault();document.getElementById('contactFeedback').textContent='¡Gracias por tu interés! Este formulario es demostrativo y todavía no envía mensajes.';contactForm.reset();});
+  const toTop=document.getElementById('toTop');
+  window.addEventListener('scroll',()=>toTop.classList.toggle('show',window.scrollY>450));
+  toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>
